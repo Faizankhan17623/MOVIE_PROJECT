@@ -5,6 +5,13 @@
 /.pnp
 .pnp.js
 
+
+node_modules
+.env
+package-lock.json
+
+
+
 # testing
 /coverage
 
@@ -24,3 +31,13 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 pnpm-lock.yaml
+
+
+
+
+
+
+
+
+
+
