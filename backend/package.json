@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./index.js",
-    "start": "node ./index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^3.0.1",
     "moment": "^2.30.1",
-    "mongoose": "^8.10.1",
+    "mongoose": "^8.13.2",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.3",
     "node-schedule": "^2.1.1",
