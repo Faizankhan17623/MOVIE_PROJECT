@@ -3,6 +3,7 @@ environment: node
 startCommand: npm start
 buildCommand: npm install
 rootDirectory: .
+nodeVersion: 16.19.1
 env:
   - key: NODE_ENV
     value: production
