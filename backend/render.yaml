@@ -1,0 +1,10 @@
+name: movie-website-backend
+environment: node
+startCommand: npm start
+buildCommand: npm install
+rootDirectory: .
+env:
+  - key: NODE_ENV
+    value: production
+  - key: PORT
+    value: 3000
