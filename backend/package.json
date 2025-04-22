@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "clean": "rm -rf node_modules package-lock.json && npm install"
+    "clean": "rm -rf node_modules package-lock.json && npm install",
+    "postinstall": "npm rebuild"
   },
   "author": "Faizan khan",
   "license": "ISC",
@@ -37,8 +38,8 @@
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^3.0.1",
     "moment": "^2.30.1",
-    "mongodb": "^4.1.4",
-    "mongoose": "^6.0.12",
+    "mongodb": "4.1.1",
+    "mongoose": "5.13.8",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.3",
     "node-schedule": "^2.1.1",
