@@ -7,7 +7,6 @@ const fileUpload = require('express-fileupload')
 const colors = require('colors')
 // var morgan = require('morgan')
 // const VisitorCounter = require('express-visitor-counter')
-/
 require('./Background_Process/Shows/movieStatusCronjobs')
 require('./Background_Process/Tickets/Tickets')
 require('./Background_Process/ReturnnsoldTickets')
@@ -15,10 +14,10 @@ require('./Background_Process/ReturnnsoldTickets')
 const app = express()
 // Taking extra precautions if the first two are blocked then in this case we will use the third one if the user has blocked first two
 const port = process.env.DEFAULT_PORT_NUMBER || process.env.SECOND_NUMBER || 4003
-
 const DatabaseConnection  = require('./config/database')
 const {CloudConnect} = require('./config/cloudinary')
 
+// console.log(port)
 const auth = require('./routes/User')
 const Admin = require('./routes/Admin')
 const Orgainezer = require('./routes/Organizaer')

@@ -49,3 +49,5 @@ route.delete("/delete-Allshow",auth,IsOrganizer,DeleteAllShow)
 // THis is the route that is going to upload the show
 route.put("/Upload",auth,IsOrganizer,uploadtheshow)
 module.exports = route
+
+// /api/v1/Show/Get-Alltags

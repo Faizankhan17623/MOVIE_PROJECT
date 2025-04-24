@@ -26,10 +26,10 @@ route.put("/Update-TicketsTime",auth,IsTheatrer,UpdateTime)
 route.get("/Tickets-Created",auth,IsTheatrer,GetAllticketsCreated)
 
 
-route.get("/CalculateTotalSale",auth,IsTheatrer,CalculateTotalSale)
 // DONE
 
 // new 
+route.get("/CalculateTotalSale",auth,IsTheatrer,CalculateTotalSale)
 route.get("/Theatre-Details",auth,IsTheatrer,SingleTheatreDetails)
 route.get("/Show-Alloted-Details",auth,IsTheatrer,GetShowAllotedDetails)
 route.get("/All-Tickets-Details",auth,IsTheatrer,getAllticketsDetails)

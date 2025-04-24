@@ -1,5 +1,4 @@
 const Theatres = require('../../models/Theatres')
-
 exports.GetAllTheatreDetails = async(req,res)=>{
     try {
         const Finding = await Theatres.find({});
@@ -14,5 +13,3 @@ exports.GetAllTheatreDetails = async(req,res)=>{
         res.status(500).json({message:"Internal Server Error"});
     }
 }
-
-

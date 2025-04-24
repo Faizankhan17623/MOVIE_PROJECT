@@ -9,7 +9,10 @@ const crypto = require('crypto');
 const session = require('express-session');
 const mongoose = require('mongoose')
 const mailSender = require('../../utils/mailsender')
+const generatePDF = require('../../templates/userTemplates/sendPdf')
 const TicketTemplate = require('../../templates/userTemplates/TicketTemplate')
+const ticket = require('../../models/ticket')
+
 // Student Features api kar ke ek page hain github main usko dekh lena agay payment ke isme kuch issue aaye to 
 
 
@@ -184,7 +187,7 @@ exports.MakePayment = async(req,res) => {
         });
         // const yes = "222222"    o not delete this keeep it for the testing purpose
 
-        const twominutes =   30 * 1000; // 2 minutes in milliseconds
+        const twominutes =   50 * 1000; // 2 minutes in milliseconds
 
         // console.log(UserFinders)
         
@@ -312,7 +315,8 @@ exports.Verifypayment = async(req,res) => {
 
                 createTicket.ticketsPurchased.push(paymentId);
                 await createTicket.save({ session });
-
+                // console.log(updatedPayment)
+                // console.log(createTicket)
                 // Update user's payment record
                 await USER.updateOne(
                     { _id: userId },
@@ -368,6 +372,43 @@ exports.Verifypayment = async(req,res) => {
         return res.status(500).json({
             message: error.message || "Payment verification failed",
             success: false
+        });
+    }
+}
+
+
+
+exports.MakePdf = async(req,res)=>{
+    try{
+        const { ticketId } = req.params;
+
+        // Find ticket in database
+        const ticketData = await Payment.findById(ticketId);
+        if (!ticketData) {
+            return res.status(404).json({ 
+                success: false, 
+                message: 'Ticket not found' 
+            });
+        }
+
+        // Generate HTML from template
+        const htmlContent = TicketTemplate(ticketData);
+
+        // Generate PDF buffer
+        const pdfBuffer = await generatePDF(htmlContent);
+
+        // Set response headers
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `attachment; filename=ticket-${ticketId}.pdf`);
+
+        // Send PDF
+        res.send(pdfBuffer);
+    }catch(error){
+        console.error('PDF generation error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error generating PDF',
+            error: error.message 
         });
     }
 }

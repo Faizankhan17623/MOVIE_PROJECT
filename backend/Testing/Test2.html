@@ -1,36 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Succesfull mail</title>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Movie Tickets</title>
+		
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./Style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <div class="container">
-        <div class="message">Payment Succesfull mail</div>
-        <div class="one">
-            <p>Show Date  </p>
-            <p>Show time  </p>
+    </head>
+    <body>
+
+        <div class="container">
+            <p class="message">This is the tickets receiving mail</p>
+            
+            <div class="container1">
+                <div class="one">
+                    <p>Show Date: ${data.Showdate}</p>
+                    <p class="showTime">Show time: ${timeChnage}</p>
+                </div>
+
+                <div class="two">
+                    <p>Total Tickets Purchased: ${data.totalTicketpurchased}</p>
+				</div>
+
+                <div class="three">
+				 	<p>Total Amount: <i class="fa-solid fa-indian-rupee-sign"></i>${data.amount}</p>
+				</div>
+
+            </div>
+            
+            <div class="container2">
+                <i class="fa-solid fa-arrow-down"></i>
+                <div class="movieDetails">
+                    <p>Categorey Name: ${data.categoryName}</p>
+                    <p>Price: ${data.price}</p>
+                    <p>Total Ticket Purchased: ${data.ticketsPurchased}</p>
+                </div>
+                <div></div>
+            </div>
+            
+            <div class="container3">
+                <div class="four">
+                    <p>Ticket Purchase Date: ${data.purchaseDate}</p>	
+				</div>
+                <div class="five">
+					<p>Thank you for choosing our cinema - your perfect movie escape awaits! 🎬</p>
+				</div>
+                <div class="six">
+                    <p>Payment Status: ${data.Payment_Status}</p>
+				</div>
+            </div>
+            <button>Download Tickets</button>
+            <div class="support">If this was not done by you, please contact the support 
+                href="mailto:faizankhan901152@gmail.com">Support</a>. We are here to help!</div>
         </div>
-        <div class="two"></div>
-        <div class="three"></div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+    <script src="./Checks.js"></script>
+    </html>
+<!-- 
 
-        <div class="main">
-            <i class="ri-arrow-down-wide-line"></i>
-        </div>
-
-
-        <div class="four"></div>
-        <div class="five"></div>
-        <div class="six"></div>
-        <div class="support">If you have any questions or need assistance, please feel free to reach out to us via the contact support <a
-                href="mailto:faizankhan901152@gmail.com">Contact us </a>. We are here to help!</div>
-    </div>
-    <button>Clicm me </button>
-</body>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
-<script src="./Checks.js"></script>
-</html>
+{/* <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+<script src="./Checks.js"></script> */} -->

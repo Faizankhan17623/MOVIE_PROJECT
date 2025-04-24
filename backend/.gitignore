@@ -7,7 +7,7 @@
 .env
 .env.*
 !.env.example  # <-- optional: keep a sample env file for sharing
-
+env 
 # lock files
 package-lock.json
 yarn.lock
@@ -26,3 +26,9 @@ yarn-error.log*
 
 node_modules/
 /node_modules
+
+
+
+node_modules
+.env
+package-lock.json

@@ -1,10 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const DatabaseConnection = async ()=>{
-    mongoose.connect(process.env.DATABASE_URL,{
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    mongoose.connect(process.env.DATABASE_URL)
     .then(()=>{
         console.log("The databse connection is been done".bgBlue)
     })
