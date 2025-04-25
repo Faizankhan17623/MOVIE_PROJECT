@@ -1,8 +1,8 @@
 const pdf = require('html-pdf');
-
+const template = require('./pdfTemplate')
 const generatePDF = (htmlTemplate) => {
     console.log("Generating PDF...");
-    console.log(htmlTemplate);
+    // console.log(htmlTemplate);
     return new Promise((resolve, reject) => {
         if (!htmlTemplate) {
             reject(new Error('HTML template is required'));
@@ -28,6 +28,7 @@ const generatePDF = (htmlTemplate) => {
                 resolve(buffer);
             }
         });
+        console.log("PDF generated and send successfully.");
     });
 };
 

@@ -1,4 +1,42 @@
-<!DOCTYPE html>
+const pdfTemplate = (data) => {
+  console.log(data);
+    const categories = data.categoryDetails ?? data.ticketCategorey ?? [];
+    // console.log("Thisa are the categories", categories);
+    const totalAmount = categories.reduce((sum, cat) => sum + (cat.price * cat.ticketCount), 0);
+    // console.log("THis is the total amount", Number(totalAmount));
+
+
+    let purchaseDates = data.purchaseDate;
+    if(purchaseDates) {
+        purchaseDates = purchaseDates.split(" ");
+        let Timing = purchaseDates[2].split(":");
+        let hour = parseInt(Timing[0]);
+        let minute = parseInt(Timing[1]);
+        if (hour > 12) {
+            hour = hour - 12;
+            purchaseDates = `${hour}:${minute} PM`;
+        } else {
+            purchaseDates = `${hour}:${minute} AM`;
+        }
+    }
+
+
+    let timeChnage = data.time;
+    if(timeChnage) {
+        timeChnage = timeChnage.split(":");
+        let hour = parseInt(timeChnage[0]);
+        let minute = parseInt(timeChnage[1]);
+        if (hour > 12) {
+            hour = hour - 12;
+            timeChnage = `${hour}:${minute} PM`;
+        } else {
+            timeChnage = `${hour}:${minute} AM`;
+        }
+    }
+    console.log("This is the purchase date", purchaseDates);
+    const reference = Math.floor(Math.random() * 1000000)
+
+    return `<!DOCTYPE html>
         <html>
         <head>
             <meta charset="utf-8">
@@ -76,9 +114,9 @@
                 <p><strong>Purchase Date:</strong> ${purchaseDates}</p>
               </div>
               <div class="ticket-info2">
-                <p><strong>Show Date:</strong> ${data.movieName}</p>
-                <p><strong>Show Time:</strong> ${data.theatreName}</p>
-                <p><strong>Purchase Date:</strong> ${data.theatreLocation}</p>
+                <p><strong>Show name:</strong> ${data.movieName}</p>
+                <p><strong>Theatre name:</strong> ${data.theatreName}</p>
+                <p><strong>Theatre location:</strong> ${data.theatreLocation}</p>
               </div>
             </div>
 
@@ -95,9 +133,9 @@
                     ${categories.map(cat =>`
                         <tr>
                             <td>${cat.categoryName}</td>
-                            <td>${cat.ticketsPurchased}</td>
+                            <td>${cat.ticketCount}</td>
                             <td>₹${cat.price}</td>
-                            <td>₹${cat.price * cat.ticketsPurchased}</td>
+                            <td>₹${cat.price * cat.ticketCount}</td>
                         </tr>
                     `).join('')}
                 </tbody>
@@ -115,4 +153,7 @@
                 <p>This is a computer-generated invoice and does not require a signature.</p>
             </div>
         </body>
-        </html>
+        </html>`;
+};
+
+module.exports = pdfTemplate;

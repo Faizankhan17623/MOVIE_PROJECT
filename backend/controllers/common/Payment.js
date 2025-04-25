@@ -11,6 +11,7 @@ const mongoose = require('mongoose')
 const mailSender = require('../../utils/mailsender')
 const generatePDF = require('../../templates/userTemplates/sendPdf')
 const TicketTemplate = require('../../templates/userTemplates/TicketTemplate')
+const PdfTemplate = require('../../templates/userTemplates/pdfTemplate')
 const ticket = require('../../models/ticket')
 
 // Student Features api kar ke ek page hain github main usko dekh lena agay payment ke isme kuch issue aaye to 
@@ -120,7 +121,7 @@ exports.MakePayment = async(req,res) => {
             showid: ShowId,
             time: time,
         })
-
+        // console.log("SameTimeFinding",SameTimeFinding)
         if(SameTimeFinding){
             return res.status(400).json({
                 message:"You have already purchased tickets for this time go and purchase for antoher time",
@@ -346,8 +347,12 @@ exports.Verifypayment = async(req,res) => {
             }
         } else {
             // Payment verification failed - update status to failure
+            const now = new Date();
+            const pattern = date.compile('ddd, DD/MM/YYYY HH:mm:ss');
+            const ps = date.format(now, pattern);
+
             await Payment.findOneAndUpdate(
-                { razorpay_order_id, Payment_Status: "created" },
+                { razorpay_order_id },
                 {
                     Payment_Status: "failure",
                     razorpay_payment_id: razorpay_payment_id || null,
@@ -355,11 +360,8 @@ exports.Verifypayment = async(req,res) => {
                     purchaseDate: ps,
                     paymentDate: ps,
                     failureReason: "Signature verification failed"
-                },
-                { session }
+                }
             );
-
-            await session.commitTransaction();
 
             return res.status(400).json({
                 message: 'Payment verification failed',
@@ -369,9 +371,29 @@ exports.Verifypayment = async(req,res) => {
         }
     } catch (error) {
         console.error("Payment verification error:", error);
+        
+        // Update payment status to failure in case of any error
+        const now = new Date();
+        const pattern = date.compile('ddd, DD/MM/YYYY HH:mm:ss');
+        const ps = date.format(now, pattern);
+
+        try {
+            await Payment.findOneAndUpdate(
+                { razorpay_order_id: req.body.razorpay_order_id },
+                {
+                    Payment_Status: "failure",
+                    failureReason: error.message || "Payment verification failed",
+                    paymentDate: ps
+                }
+            );
+        } catch (dbError) {
+            console.error("Failed to update payment status:", dbError);
+        }
+
         return res.status(500).json({
             message: error.message || "Payment verification failed",
-            success: false
+            success: false,
+            status: "failure"
         });
     }
 }
@@ -383,26 +405,64 @@ exports.MakePdf = async(req,res)=>{
         const { ticketId } = req.params;
 
         // Find ticket in database
-        const ticketData = await Payment.findById(ticketId);
-        if (!ticketData) {
-            return res.status(404).json({ 
-                success: false, 
-                message: 'Ticket not found' 
-            });
+        const ticketData = await Payment.findOne({_id:ticketId})
+        if(!ticketData){
+            return res.status(400).json({
+                message:"The Ticket data is not present",
+                success:false
+            })
         }
 
-        // Generate HTML from template
-        const htmlContent = TicketTemplate(ticketData);
+        const MovieFind = await CreateShow.findOne({_id:ticketData.showid})
+        if(!MovieFind){
+            return res.status(400).json({
+                message:"The movie is not present",
+                success:false
+            })
+        }
 
-        // Generate PDF buffer
-        const pdfBuffer = await generatePDF(htmlContent);
 
-        // Set response headers
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename=ticket-${ticketId}.pdf`);
+        const TheatreFind = await Theatre.findOne({_id:ticketData.theatreid})
 
-        // Send PDF
-        res.send(pdfBuffer);
+        if(!TheatreFind){
+            return res.status(400).json({
+                message:"The Theatre is not present",
+                success:false
+            })
+        }
+    console.log("This is the ticket data",ticketData)
+  // build exactly what the PDF template expects
+  const templateData = {
+    movieName:    MovieFind.title,
+    theatreName:  TheatreFind.Theatrename,
+    theatreLocation: TheatreFind.locationname,
+    Showdate:     ticketData.Showdate,
+    time:         ticketData.time,
+    purchaseDate: ticketData.purchaseDate,
+    Payment_Status: ticketData.Payment_Status,
+    paymentMethod:  ticketData.paymentMethod,
+    totalTicketpurchased: ticketData.totalTicketpurchased,
+    amount:          ticketData.amount,
+    categoryDetails: ticketData.ticketCategorey.map(cat => ({
+      categoryName:  cat.categoryName,
+      ticketCount:   cat.ticketsPurchased,
+      price:         cat.price
+    }))
+  };
+
+  console.log("templateData",templateData)
+
+  const html = PdfTemplate(templateData);
+
+  const pdfBuffer = await generatePDF(html);
+
+  res
+    .status(200)
+    .set({
+      'Content-Type':        'application/pdf',
+      'Content-Disposition': `attachment; filename="ticket-${ticketId}.pdf"`
+    })
+    .send(pdfBuffer);
     }catch(error){
         console.error('PDF generation error:', error);
         res.status(500).json({ 

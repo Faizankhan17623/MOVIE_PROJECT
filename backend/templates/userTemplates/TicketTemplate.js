@@ -1,5 +1,5 @@
 const ticketTemplate = (data) => {
-    console.log(data);
+    // console.log(data);
     let timeChnage = data.time;
     if(timeChnage) {
         timeChnage = timeChnage.split(":");
@@ -26,6 +26,7 @@ const ticketTemplate = (data) => {
             purchaseDates = `${hour}:${minute} AM`;
         }
     }
+
     return `<!DOCTYPE html>
     <html>
     <head>
@@ -136,7 +137,7 @@ const ticketTemplate = (data) => {
             </div>
             <div class="container2">
                 <div>
-                    <p> Payment Status :${data.Payment_Status}</p>
+                    <p> Payment Status :Success</p>
                 </div>
                 <div>
                     <p> Mode of Payment :${data.paymentMethod}</p>
@@ -155,7 +156,7 @@ const ticketTemplate = (data) => {
             <p>📎 We've attached a PDF version of your tickets to this email. 
                 Please download and save it for your records.</p>
             <p class="support">If this was not done by you, please contact the support 
-                href="mailto:faizankhan901152@gmail.com">Support</a>. We are here to help!</span>
+                <a href="mailto:faizankhan901152@gmail.com">Support</a>. We are here to help!</span>
         </div>
     </body>
     </html>`;
