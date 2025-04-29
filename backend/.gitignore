@@ -1,34 +1,3 @@
-# dependencies
-/node_modules
-.pnp/
-.pnp.js
-
-# environment
-.env
-.env.*
-!.env.example  # <-- optional: keep a sample env file for sharing
-env 
-# lock files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# build output
-/build
-/coverage
-
-# misc
-.DS_Store
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-
-node_modules/
-/node_modules
-
-
-
 node_modules
 .env
 package-lock.json

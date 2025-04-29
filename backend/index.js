@@ -5,8 +5,8 @@ const cors = require('cors')
 const cookieParser  = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 const colors = require('colors')
-// var morgan = require('morgan')
-// const VisitorCounter = require('express-visitor-counter')
+var morgan = require('morgan')
+const VisitorCounter = require('express-visitor-counter')
 require('./Background_Process/Shows/movieStatusCronjobs')
 require('./Background_Process/Tickets/Tickets')
 require('./Background_Process/ReturnnsoldTickets')
@@ -29,9 +29,9 @@ const Visitor = require('./models/Visitor')
 
 app.use(express.json())
 app.use(cookieParser ())
-// app.use(morgan("dev"));
+app.use(morgan("dev"));
 
-// app.use(VisitorCounter(Visitor))
+app.use(VisitorCounter(Visitor))
 app.use(cors(
     origin="http://localhost:5173/",
     optionsSuccessStatus=200

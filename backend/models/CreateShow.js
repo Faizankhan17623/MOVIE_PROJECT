@@ -123,6 +123,16 @@ const CreateShowSchema = new mongoose.Schema({
     movieDuration:{
         type:String,
         required:true
-    }
+    },
+    ratingAndReviews: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "RatingAndReview",
+        },
+    ],
+    ticketspurchased:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'payment'
+    }],
 },{timestamps:true})
 module.exports = mongoose.model('Show',CreateShowSchema)

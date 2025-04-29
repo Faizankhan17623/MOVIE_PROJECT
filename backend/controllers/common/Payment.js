@@ -319,11 +319,20 @@ exports.Verifypayment = async(req,res) => {
                 // console.log(updatedPayment)
                 // console.log(createTicket)
                 // Update user's payment record
-                await USER.updateOne(
-                    { _id: userId },
-                    { $push: { PaymentId: paymentId } },
-                    { session }
-                );
+
+                await USER.findByIdAndUpdate(userId,{$push:{PaymentId:paymentId}})
+                const paymentIds = await Payment.findOne({_id: paymentId})
+                if(!paymentIds){
+                    return res.status(400).json({
+                        message:"The payment is not present",
+                        success:false
+                    })
+                }
+                await CreateShow.findByIdAndUpdate(paymentIds.showid,{
+                    $push:{
+                        ticketspurchased:userId
+                    }
+                },{new:true})
                 // let otp = 231321321
                 // const mailes = await mailSender(
                 //     UserFinders.email,

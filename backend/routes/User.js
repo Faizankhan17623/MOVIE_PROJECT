@@ -8,6 +8,7 @@ const {Comment} = require('../controllers/common/Comment')
 const {PosterLike,BannerDisliked} = require('../controllers/Orgainezer/CreateTheatreShow')
 const {LinkSend,ResetPassword} = require('../controllers/user/Resetpassword')
 const {AllShows,usingtitle} = require('../controllers/common/Showlist')
+const {createRating,getAverageRating,getAllRatingReview} = require("../controllers/common/RatingAndRviews")
 // const {TicketPurchased,TicketPurchasedFullDetails} = require("../controllers/Dashboard/UserDashboard")
 
 // DONE 
@@ -48,7 +49,11 @@ route.put("/Comment-Banner",auth,Comment)
 route.put("/Send-Message",auth,SendMessage) 
 // This is the route that will be used to create the user dashboard and this is going to be used in the dashboard
 // route.get("/Ticket-Purchased",auth,TicketPurchased)
+
+
+
+route.post("/createRating", auth, IsUSER, createRating)
+route.get("/getAverageRating", getAverageRating)
+route.get("/getReviews", getAllRatingReview)
 module.exports = route      
-
-
 // memphis
