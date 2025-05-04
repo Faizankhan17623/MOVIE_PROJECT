@@ -1,13 +1,11 @@
-import {Routes,Route} from 'react-router-dom'
-import  Home  from './Components/Home'
-
-function App() {
-  return(
-    <div className='w-full bg-black'>
-      <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-      </Routes>
-      This is the testing
+import React from 'react'
+import Navbar from './Components/Navbar'
+import Banner from './Components/Banner'
+const App = () => {
+  return (
+    <div className='w-screen h-screen bg-richblack-900 overflow-hidden'>
+        <Navbar></Navbar>
+        <Banner></Banner>
     </div>
   )
 }
