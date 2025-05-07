@@ -7,8 +7,8 @@
     --font-edu-sa:'Edu SA Beginner', 'cursive';
 
     /* Color */
-    /* --color-white:'#ffffff'; */
-    /* --color-black-5:'#366491'; */
+    
+    --color-light:'#96ab9b';
     --color-transparent:'#ffffff00';
 
     /* Color Rich Balck */
@@ -141,3 +141,11 @@
     box-sizing: border-box;
 }
 
+
+
+
+
+.react-switch {
+    vertical-align: middle;
+    margin-left: 4px;
+  }

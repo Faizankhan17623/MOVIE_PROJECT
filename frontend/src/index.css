@@ -6,8 +6,9 @@
     --font-edu-sa:'Edu SA Beginner', 'cursive';
 
     /* Color */
-    --color-black:'#366491';
+    /* --color-black:'#000000'; */
     --color-transparent:'#ffffff00';
+    --color-light:'#96ab9b';
 
     /* Color Rich Balck */
     --color-richblack-5: #F1F2FF;
@@ -132,3 +133,4 @@
     --breakpoint-sm: 650px;
     --breakpoint-lg: 1260px;
 }
+
