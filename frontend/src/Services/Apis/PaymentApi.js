@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_MAIN_BACKEND_URL
+const BASE_URL = import.meta.env.VITE_MAIN_BACKEND_URL_PAYMENT
 
 export const MakePayment = {
     MakePayment:BASE_URL+"/Make-Payment"

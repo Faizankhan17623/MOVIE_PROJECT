@@ -1,7 +1,9 @@
 import React, {  useState } from 'react'
 import Navbar from './Components/Navbar'
 import toast, { Toaster } from 'react-hot-toast';
+import Banner from './Components/Banner'
 // import.meta.env.VITE_MAIN_BACKEND_URL
+console.log(import.meta.env.VITE_MAIN_BACKEND_URL)
 const App = () => {
   const [darkmode,setdarkmode] = useState(()=>{
     return JSON.parse(localStorage.getItem('Theme') || false)
@@ -20,6 +22,7 @@ const App = () => {
   return (
     <div className={`${darkmode ? 'bg-richblack-900' :'bg-richblack-900'} overflow-hidden w-screen h-screen`}>
         <Navbar setColors={notify} darkmode={darkmode}></Navbar>
+        <Banner></Banner>
         <Toaster position="top-right" reverseOrder={true}/>
     </div>
   )

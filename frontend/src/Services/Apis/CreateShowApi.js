@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_MAIN_BACKEND_URL
+const BASE_URL = import.meta.env.VITE_MAIN_BACKEND_URL_SHOW
 
 export const tags = {
     CreateTags:BASE_URL+"/Create-tags",
