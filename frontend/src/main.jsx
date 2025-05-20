@@ -4,18 +4,23 @@ import './index.css'
 import App from './App.jsx'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter } from 'react-router-dom'
-// import {Provider} from 'reac'
-// import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
+import rootReduers from './reducer/index.js'
+import { Provider } from 'react-redux'
 
-// const Store = configureStore({
-//   reducer:rootre
-// })
+
+const store = configureStore({
+  reducer: rootReduers
+})
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-
+    <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <App/>
       <Toaster position="top-right" reverseOrder={true}/>
     </BrowserRouter>
+    </Provider>
   </StrictMode>,
 )

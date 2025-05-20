@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @theme{
     --font-inter: 'Inter', sans-serif;
     --font-mono:'Roboto Mono', 'monospace';
@@ -142,10 +141,51 @@
 }
 
 
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: white;
+  opacity: 0.5;
+}
 
+.swiper-pagination-bullet-active {
+  background:white;
+  opacity: 1;
+}
 
 
 .react-switch {
-    vertical-align: middle;
+    vertical-align: end;
     margin-left: 4px;
   }
+
+   
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+ 
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} 
+
+.navbar {
+  border-bottom-width: 2px;
+  margin-bottom: 5rem;
+}
+
+.swiper-container {
+  margin-top: 2rem;
+}

@@ -5,6 +5,7 @@ const initialState = {
   token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem('token')) : null,
   isLoggedIn: false,
   loading: false,
+  image:''
 };
 
 
@@ -23,9 +24,12 @@ const authSlice = createSlice({
         },
         setliggenin(state,value){
             state.isLoggedIn = value.payload
+        },
+        setUserImage(state,value){
+            state.image = value.payload
         }
     }
 })
 
-export const {setUser,setLoading,setToken,setliggenin} = authSlice.actions
+export const {setUser,setLoading,setToken,setliggenin,setUserImage} = authSlice.actions
 export default authSlice.reducer

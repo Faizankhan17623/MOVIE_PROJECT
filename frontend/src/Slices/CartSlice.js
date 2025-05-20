@@ -19,6 +19,7 @@ const cartSlice = createSlice({
                 toast.error("Ticket already added to cart")
                 return
             }
+            
             state.cart.push(ticket)
             state.totalItems++
             state.total += ticket.price

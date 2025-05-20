@@ -4,11 +4,11 @@ export const CreateUser ={
     createuser:BASE_URL+"/Create-User"
 }
 
-export const CreateOtp = {
+export const SendOtp = {
     createotp:BASE_URL+"/Create-Otp"
 }
 
-export const login ={
+export const Login ={
     login:BASE_URL+"/Login"
 }
 
@@ -23,7 +23,7 @@ export const UpdatePersonalDetails = {
 
 export const ResetPassword = {
     LinkSend:BASE_URL+"/Send-Link",
-    ResetPassword:BASE_URL+"/Change-Password"
+    Resetpassword:BASE_URL+"/Change-Password"
 }
 
 export const GetAllShows = {
@@ -31,11 +31,12 @@ export const GetAllShows = {
 }
 
 export const SpecificShow = {
-    SpecificShow:BASE_URL+"/Specific-Show"
+    specificshow:BASE_URL+"/Specific-Show"
 }
 
 export const Comment = {
-    Comment:BASE_URL+"/Comment-Banner"
+    Comments:BASE_URL+"/Comment-Banner",
+    GetAllComment:BASE_URL+"/Get-Comment"
 }
 
 export const PersonalChoice = {
@@ -44,12 +45,14 @@ export const PersonalChoice = {
 }
 
 export const SendMessage = {
-    SendMessage:BASE_URL+"/Send-Message"
+    SendMessages:BASE_URL+"/Send-Message",
+    UpdateMessage:BASE_URL+"/Update-Message",
+    GetAllMessages:BASE_URL+"/Get-AllMessages",
 }
 
 export const TicketData = {
-    TicketPurchased:BASE_URL+"/Ticket-Purchased",
-    TicketPurchasedFullDetails:BASE_URL+"/Ticket-Purchased-FullDetails"
+    TicketPurchase:BASE_URL+"/Ticket-Purchased",
+    TicketPurchasedFullDetail:BASE_URL+"/Ticket-Purchased-FullDetails"
 }
 
 export const Ratings = {
