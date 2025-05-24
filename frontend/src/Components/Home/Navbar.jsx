@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Image from '../assets/Logo/sd-removebg-preview.png'
-import Image2 from '../assets/Logo/sdreincarneted-removebg-preview.png'
-import Image3 from '../assets/Logo/dada_bhai_image-removebg-preview.png'
-import Image4 from '../assets/Logo/energy.jpg'
+import Image from '../../assets/Logo/sd-removebg-preview.png'
+// sd-removebg-preview.png
+import Image2 from '../../assets/Logo/sdreincarneted-removebg-preview.png'
+import Image3 from '../../assets/Logo/dada_bhai_image-removebg-preview.png'
+import Image4 from '../../assets/Logo/energy.jpg'
 
 import { FaLongArrowAltDown } from "react-icons/fa";
 import { IoReorderThreeSharp } from "react-icons/io5";
@@ -10,14 +11,17 @@ import { FaMoon } from "react-icons/fa6";
 import { IoSunnyOutline } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
-import '../App.css'
+import '../../App.css'
+
 const Navbar = ({setColors,darkmode}) => {
 
   const [path, setpath] = useState(false)
 
   useEffect(()=>{
+
     const currentUrl = window.location.pathname
     setpath(currentUrl)
+
   },[])
 
   const tagsnames = {
@@ -52,7 +56,7 @@ const color_change = ()=>{
     <div className='w-screen h-26 flex justify-between items-center border-b-3 text-white'>
         <div className='py-4 pl-6'>
           <a href="/" className=''>
-            <img src={darkmode?Image:Image3} alt="Main logo" className='h-18 w-[250px] text-black'/>
+            <img src={darkmode?Image:Image3} alt="Main logo" className='h-18 w-[250px] text-black' loading='lazy'/>
           </a>
         </div>
 

@@ -2,7 +2,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import '../App.css';
+
+import '../../App.css'
 
 import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from 'swiper/modules';
 
@@ -61,6 +62,7 @@ const Slider = () => {
             <img 
               src={slide.image} 
               alt={slide.title}
+              loading='lazy'
               className="w-full h-full object-cover rounded-lg"
             />
             <div className="absolute bottom-10 left-10 text-black rounded-lg">

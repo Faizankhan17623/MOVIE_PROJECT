@@ -1,9 +1,9 @@
 import React, {  useState } from 'react'
-import Navbar from './Components/Navbar'
+import Navbar from './Components/Home/Navbar'
 import toast from 'react-hot-toast';
-import Slider from './Components/Slider'
-import Finder from './Components/Finder'
-
+import Slider from './Components/Home/Slider'
+import Finder from './Components/Home/Finder'
+import Listing from './Components/Home/Listing';
 const App = () => {
   const [darkmode,setdarkmode] = useState(()=>{
     return JSON.parse(localStorage.getItem('Theme') || false)
@@ -29,6 +29,7 @@ const App = () => {
       </div>
       <Finder />
     </div>
+      <Listing/>
   </div>
   )
 }

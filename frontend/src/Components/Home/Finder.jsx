@@ -3,6 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
 import { useForm } from "react-hook-form";
 import { FaStarOfLife } from "react-icons/fa6";
+
 import { FaArrowLeft,FaArrowRight  } from "react-icons/fa";
 const DATA = [
     { id: 1, location: "Nagar", date: "21-05-2025", theatreName: "nagar", movieName: "rascal" },
@@ -10,10 +11,10 @@ const DATA = [
     { id: 3, location: "kondhave", date: "23/05/2025", theatreName: "kondhave theatre", movieName: "kondhaving" },
     { id: 4, location: "sada galli", date: "24-05-2025", theatreName: "sada theatre", movieName: "sada souda" },
     { id: 5, location: "name nahi", date: "25-05-2025", theatreName: "nameching theatre", movieName: "nameing" },
-    { id: 6, location: "Nagar", date: "21-05-2025", theatreName: "nagar", movieName: "rascal" },
-    { id: 7, location: "Nagar", date: "21-05-2025", theatreName: "nagar", movieName: "rascal" },
-    { id: 8, location: "Nagar", date: "21-05-2025", theatreName: "nagar", movieName: "rascal" },
-    { id: 9, location: "Nagar", date: "21-05-2025", theatreName: "nagar", movieName: "rascal" },
+    { id: 6, location: "Nagar", date: "28-05-2025", theatreName: "nagar", movieName: "rascal" },
+    { id: 7, location: "Nagar", date: "28-05-2025", theatreName: "nagar", movieName: "rascal" },
+    { id: 8, location: "Nagar", date: "28-05-2025", theatreName: "nagar", movieName: "rascal" },
+    { id: 9, location: "Nagar", date: "28-05-2025", theatreName: "nagar", movieName: "rascal" },
     { id: 10, location: "Nagar", date: "21-05-2025", theatreName: "nagar", movieName: "rascal" },
     { id: 11, location: "Nagar", date: "21-05-2025", theatreName: "nagar", movieName: "rascal" },
     { id: 12, location: "Nagar", date: "21-05-2025", theatreName: "nagar", movieName: "rascal" },
@@ -30,6 +31,7 @@ const Finder = () => {
     const resultsPerPage = 3;
 
     const onSubmit = (data) => {
+        console.log(data)
         setIsLoading(true);
         setCurrentPage(0)
         // Format date to match DATA (DD-MM-YYYY)
@@ -68,6 +70,17 @@ const Finder = () => {
         setCurrentPage(prev => Math.min(totalPages - 1, prev + 1));
     };
 
+const getMinDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0]; // Returns YYYY-MM-DD format
+};
+
+const getMaxDate = () => {
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + 45); // Add 45 days
+    return maxDate.toISOString().split('T')[0]; // Returns YYYY-MM-DD format
+};
 
 
     return (
@@ -87,7 +100,17 @@ const Finder = () => {
                         </div>
                         <div className="flex flex-col-reverse items-center text-white">
                             <label htmlFor="date" className="text-white">Date</label>
-                            <input type="date" id="date" {...register("date", { required: "Date is required" })} placeholder="Add Date" className="w-[13rem] text-white bg-gray-800 pr-10" />
+                            <input type="date" id="date" {...register("date", { required: "Date is required" ,
+                            validate:{
+                                isInRange:value =>{
+                                    const selectedDate = new Date(value)
+                                    const min = new Date(getMinDate())
+                                    const max = new Date(getMaxDate())
+                                    return selectedDate >= min && selectedDate <= max || 
+                        "Please select a date between today and 60 days from now";
+                                }
+                            }
+            })} placeholder="Add Date" className="w-[13rem] text-white bg-gray-800 pr-10" min={getMinDate()} max={getMaxDate()}/>
                             {errors.date && <span><FaStarOfLife className="text-red-800"/>{errors.date.message}</span>}
                         </div>
                         <div className="flex flex-col-reverse items-center">
@@ -121,11 +144,14 @@ const Finder = () => {
                                 {visibleResults.map((data) => (
                                     <div key={data.id} className="bg-gray-800 p-4 rounded-lg w-[300px]">
                                         <div className="space-y-2">
+
+                                            {/* ismee hou bhee aadd kaar sakttee haaiin jaaisee kee img keey haan locattion kaa and aarrious tthings */}
                                             <p><span className="font-bold">Location:</span> {data.location}</p>
                                             <p><span className="font-bold">Date:</span> {data.date}</p>
                                             <p><span className="font-bold">Theatre:</span> {data.theatreName}</p>
                                             <p><span className="font-bold">Movie:</span> {data.movieName}</p>
-                                            <p>id:{data.id}</p>
+                                            {/* <p>This  if the moviee is ben releaseed orr up ccoming o is itt releeased</p> */}
+                                            {/* <p>id:{data.id}</p> */}
                                         </div>
                                     </div>
                                 ))}
