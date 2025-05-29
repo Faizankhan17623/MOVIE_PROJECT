@@ -8,6 +8,7 @@ const {AllotTheatre} = require('../controllers/Orgainezer/Allotment')
 const {CreateTicket} = require('../controllers/Orgainezer/CreateTicket')
 const {GetAllTheatreDetails} = require("../controllers/Dashboard/OrgainezerDashboard")
 // DONE
+
 route.post('/Create-Orgainezer',CreateOrgainezer)
 route.post('/Orgainezer-login',OrgaineserLogin)
 // DONE

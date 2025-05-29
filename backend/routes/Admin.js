@@ -10,6 +10,10 @@ const {VerifyShow,GetAllShows,verifiedSHows,AllShows} = require('../controllers/
 const{CreateLanguage,updateLanguage,deleteLanguage,Getalllanguage,deleteallanguage,GetSingleLanguage} = require('../controllers/Orgainezer/CreateLanguage')
 const {OrgainesersVerifylength,Theatrelength,GetAllUsersDetailsVerified,GetAllUsersDetailsVerifiedfalse,GetAllOrganizerDetailsVerified,GetAllOrganizerDetailsVerifiedfalse,GetAllTheatrerDetailsVerified,GetAllTheatrerDetailsVerifiedfalse} = require('../controllers/Dashboard/AdminDashboard')
 
+
+
+// This is the extra route that is been added so that the admin can delete all the comments
+// route.delete("/delete-Comment",auth,IsAdmin,deleteComment)
 // This one will work for all the orgaineser 
 // DONE
 route.put("/Org-Verification",auth,IsAdmin,VerifyOrgainezer)
@@ -20,6 +24,7 @@ route.get("/All-Orgainesers",auth,IsAdmin,GetAllorg)
 
 // This is the one that will work to create the genre 
 // DONE
+
 route.post("/Create-Genre",auth,IsAdmin,Creategenre)
 route.put("/Update-Genre",auth,IsAdmin,Updategenre)
 route.delete("/delete-Genre",auth,IsAdmin,deletegenre)
@@ -30,6 +35,7 @@ route.get("/Get-AllGenre",auth,IsAdmin,getAllGenres)
 
 // This are the route that are going to create all the sub genre
 // DONE
+
 route.post("/Create-SubGenre",auth,IsAdmin,CreateSubgenre)
 route.put("/Update-SubGenre",auth,IsAdmin,UpdateSubGenre)
 route.delete("/delete-SubGenre",auth,IsAdmin,deletesubgenre)

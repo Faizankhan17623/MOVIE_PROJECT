@@ -252,10 +252,16 @@ exports.CreateShow = async(req,res)=>{
 // This is the function that is present in the create show route on line 41
 exports.UpdateShowtitle = async(req,res)=>{
     try {
-        const id = req.params.id
+        const id = req.query.id
         const {newTitle} = req.body
-        let updating = id.toString()
-        const Finding = await CreateShow.findOne({_id:updating})
+        if(!id || !newTitle){
+            return res.status(400).json({
+                message:"The id and new title are required",
+                success:false
+            })
+        }
+
+        const Finding = await CreateShow.findOne({_id:id})
         if(!Finding){
             return res.status(400).json({
                 message:"This show is not presentplease rechek the id",
@@ -294,40 +300,52 @@ exports.UpdateShowtitle = async(req,res)=>{
 // This is the function that is present in the create show route on line 42
 exports.UpdateShowtagline = async(req,res)=>{
     try {
-        const id = req.params.id
+        const Showid = req.query.Showid
         const {newTagline} = req.body
-        let updating = id.toString()
-        const Finding = await CreateShow.findOne({_id:updating})
-        if(!Finding){
+        if(!Showid || !newTagline){
             return res.status(400).json({
-                message:"This show is not present please rechek the id",
+                message:"The show id and the new tagline are required",
                 success:false
             })
         }
 
-        if(newTitle === Finding.title){
+        // console.log("This is the id",s)
+        const Finding = await CreateShow.findOne({_id:Showid})
+        if(!Finding){
+            return res.status(400).json({
+                message:"This show is not present please recheck the id",
+                success:false
+            })
+        }
+
+        if(newTagline === Finding.tagline){
             return res.status(400).json({
                 message:"The old and the new tagline both are the same",
                 success:false
             })
         }
+
         if(Finding.VerifiedByTheAdmin === false && Finding.uploaded === false){
-            const Updating = await CreateShow.findByIdAndUpdate(id,{title:newTagline},{new:true})
+            const Updating = await CreateShow.findByIdAndUpdate(
+                Showid,
+                { tagline: newTagline },
+                { new: true }
+            )
             return res.status(200).json({
-                message:"The title is been updated",
+                message:"The tagline has been updated",
                 success:true,
                 data:Updating
             })
         }
+
         return res.status(400).json({
-            message:"The show is already been verified and cannot update it's tagline",
+            message:"The show is already verified and cannot update its tagline",
             success:false
         })
     } catch (error) {
         console.log(error)
-        console.log(error.message)
         return res.status(500).json({
-            message:"There is an error in the update show title code",
+            message:"There is an error in the update show tagline code",
             success:false
         })
     }
@@ -337,7 +355,28 @@ exports.UpdateShowtagline = async(req,res)=>{
 exports.UpdateTitleImage = async(req,res)=>{
     try {
         const newImage = req.files.newImage
-        const id = req.params.id
+        const id = req.query.id
+
+        const Image_Format = ['png','jpeg','jpg']
+       
+
+        let imageTypes = newImage.mimetype.split('/')[1].toLowerCase();
+
+
+        if(!Image_Format.includes(imageTypes)){
+            return res.status(400).json({
+                message:`The image type is not valid The valid types are ${Image_Format}`,
+                success:false
+            })
+        }
+
+        if(!id ){
+            return res.status(400).json({
+                message:"The id and the new image are required",
+                success:false
+            })
+        }
+       
 
         if(!req.files || !req.files.newImage || !req.files){
             return res.status(400).json({
@@ -346,8 +385,8 @@ exports.UpdateTitleImage = async(req,res)=>{
             })
         }
 
-        let updating = id.toString()
-        const Finding = await CreateShow.findOne({_id:updating})
+        
+        const Finding = await CreateShow.findOne({_id:id})
         if(!Finding){
             return res.status(400).json({
                 message:"This show is not present please rechek the id",
@@ -393,7 +432,32 @@ exports.UpdateTitleImage = async(req,res)=>{
 exports.UpdateTitletrailer = async(req,res)=>{
     try {
         const newTrailer = req.files.newTrailer
-        const id = req.params.id
+        
+ const id = req.query.id
+        
+        if(!id){
+            return res.status(400).json({
+                message:"The id and new title are required",
+                success:false
+            })
+        }
+
+
+        
+        const Video_Format = ['mp4','mov','mkv','gif','mkv','mpeg']
+
+
+        let VideoTypes = newTrailer.mimetype.split('/')[1].toLowerCase()
+
+
+        if(!Video_Format.includes(VideoTypes)){
+            return res.status(400).json({
+                message:`The video type is not valid The valid types are ${Video_Format}`,
+                success:false
+            })
+        }
+
+       
 
         if(!req.files || !req.files.newTrailer || !req.files){
             return res.status(400).json({
@@ -402,8 +466,8 @@ exports.UpdateTitletrailer = async(req,res)=>{
             })
         }
 
-        let updating = id.toString()
-        const Finding = await CreateShow.findOne({_id:updating})
+        
+        const Finding = await CreateShow.findOne({_id:id})
         if(!Finding){
             return res.status(400).json({
                 message:"This show is not present please rechek the id",
@@ -595,7 +659,7 @@ exports.updateReleasedToExpired = async () => {
 
 exports.SendCustomMessage = async(req,res)=>{
     try {
-        const id = req.params.id
+        const id = req.query.id
         const messages = req.body
         const Finding = await USER.findOne({_id:id})
         if(!Finding){

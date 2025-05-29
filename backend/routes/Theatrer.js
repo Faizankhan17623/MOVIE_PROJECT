@@ -8,6 +8,7 @@ const {CalculateTotalSale,SingleTheatreDetails,GetShowAllotedDetails,getAllticke
 // THis are all the routes that are present an all of them are working fine 
 // ya first wala hain iske andar theatrer apen  email id and password input main denga 
 // 1 This is the first step for creating the theatre
+
 route.post("/Create-Theatre",CreateTheatrere)
 
 // uske badh jo admin hain wo 
@@ -29,8 +30,8 @@ route.get("/Tickets-Created",auth,IsTheatrer,GetAllticketsCreated)
 // DONE
 
 // new 
-route.get("/CalculateTotalSale",auth,IsTheatrer,CalculateTotalSale)
 route.get("/Theatre-Details",auth,IsTheatrer,SingleTheatreDetails)
+route.get("/CalculateTotalSale",auth,IsTheatrer,CalculateTotalSale)
 route.get("/Show-Alloted-Details",auth,IsTheatrer,GetShowAllotedDetails)
 route.get("/All-Tickets-Details",auth,IsTheatrer,getAllticketsDetails)
 route.get("/GetSingleShowDetails",auth,IsTheatrer,getSingleShowDetails)

@@ -69,7 +69,6 @@ exports.SendMessage = async(req,res)=>{
 // tHIS IS THE FUNCTION THAT WILL HELP US SO THAT THE ROUTE IS THE PAYMENT ROUTE AND IT IS PRESENTED ON LINIE NO 7
 exports.Updatemessage = async (req,res)=>{
     try{
-
         const MessageId = req.body
         const {newMesage} = req.body
         if(!MessageId){
@@ -103,6 +102,47 @@ exports.Updatemessage = async (req,res)=>{
         console.log(error.message)
         return res.status(500).json({
             message:"There is an error in the  update message code",
+            success:false
+        })
+    }
+}
+
+
+exports.getAllMessage = async (req,res)=>{
+    try{
+        const userId = req.USER.id
+        const {id} = req.body
+        if(!id){
+            return res.status(500).json({
+                message:"The input Fields are been required",
+                success:false
+            })
+        }
+        if(!userId){
+            return res.status(400).json({
+                message:"The user is not loged in ",
+                success:false
+            })
+        }
+        const Finding = await USER.findOne({_id:id})
+        if(!Finding){
+            return res.status(400).json({
+                message:"The user is not loged in ",
+                success:false
+            })
+        }
+
+        const AllMessage = await SendMessage.find({}).populate("to")
+        return res.status(200).json({
+            message:"the messaged is been updated succesfully",
+            success:true,
+            data:AllMessage
+        })
+    }catch(error){
+        console.log(error)
+        console.log(error.message)
+        return res.status(500).json({
+            message:"There is an error in the get all message code",
             success:false
         })
     }

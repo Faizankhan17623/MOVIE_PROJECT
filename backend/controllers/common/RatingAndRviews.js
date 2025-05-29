@@ -119,16 +119,7 @@ exports.getAllRatingReview = async (req, res) => {
   try {
     const allReviews = await RatingAndReview.find({})
       .sort({ rating: "desc" })
-      // .populate({
-      //   path: "user",
-      //   select: "firstName lastName email image", // Specify the fields you want to populate from the "Profile" model
-      // })
-      // .populate({
-      //   path: "course",
-      //   select: "courseName", //Specify the fields you want to populate from the "Course" model
-      // })
       .exec()
-
 
       if(!allReviews || allReviews.length === 0) {
         return res.status(404).json({

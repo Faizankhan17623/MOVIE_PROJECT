@@ -11,6 +11,7 @@ const {uploadtheshow} = require('../controllers/Orgainezer/upload')
 // THis is the route that will create the tags for the show
 // DONE
 // These all the function are present in the create hashtags file 
+
 route.post("/Create-tags",auth,IsOrganizer,Createtags)
 route.put("/Update-tags",auth,IsOrganizer,updateTagsname)
 route.delete("/Delete-tags",auth,IsOrganizer,DeleteTagsname)

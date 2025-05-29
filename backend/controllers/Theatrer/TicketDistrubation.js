@@ -389,7 +389,7 @@ exports.UpcomigTickets = async (req, res) => {
         // console.log("This is the date format log",formattedCurrentDate)
         const allTickets = await Theatrestickets.find();
         console.log(allTickets)
-        if (allTickets.length === 0) {
+        if (!allTickets) {
             return res.status(400).json({
                 message: "There are no Tickets present",
                 success: false
@@ -444,7 +444,7 @@ exports.ExpireTickets = async (req, res) => {
         const allTickets = await Theatrestickets.find();
         // console.log(allTickets)
 
-        if (allTickets.length === 0) {
+        if (!allTickets) {
             return res.status(400).json({
                 message: "There are no Tickets present",
                 success: false
@@ -496,7 +496,7 @@ exports.ReturnRemainingTickets = async (req, res) => {
         // console.log('This are all the tickets',AllTickets)
         // console.log("This is the expired tickets",expiredTickets)
 
-        if (expiredTickets.length === 0) {  // Fix: Check if array is empty instead of `!expiredTickets`
+        if (!expiredTickets) {  // Fix: Check if array is empty instead of `!expiredTickets`
             res.status(400).json({
                 message: "There are no expired tickets available",
                 success: false
@@ -530,7 +530,7 @@ exports.ReturnRemainingTickets = async (req, res) => {
                 { new: true }
             );
             console.log("This is the updated ticket",updatedTicket)
-            if(updatedTicket.length === 0){
+            if(!updatedTicket){
                 return res.status(400).json({
                     message: "There are no tickets available to return",
                     success: false
