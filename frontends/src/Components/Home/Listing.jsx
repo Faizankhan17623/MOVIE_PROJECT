@@ -253,7 +253,7 @@ const Listing = () => {
         </div>
       </div>
       
-      <JoinCard title={'Try oganizing with us '} subttitle={'Organise your show with us '} btn={'Become an Orgainezer'} imaage={Org} />
+      <JoinCard title={'Try oganizing with us '} subttitle={'Organise your show with us '} btn={'Become An Orgainezer'} imaage={Org} />
       <Footer/>
     </div>
   )

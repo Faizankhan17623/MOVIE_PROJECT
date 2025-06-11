@@ -19,6 +19,9 @@
     --color-light:'#96ab9b';
     --color-transparent:'#ffffff00';
 
+    /* Color White */
+    --color-white-5: #FFFFFF;
+
     /* Color Rich Balck */
     --color-richblack-5: #F1F2FF;
     --color-richblack-25: #DBDDEA;  
@@ -138,6 +141,7 @@
 
 
     --color-grey-100: #E8EAEC;
+    --color-grey-200: #9A9A9A;
 
     /* This is the  break point for the screens */
     --breakpoint-sm: 650px;
@@ -193,18 +197,16 @@
 
 
 .input_box{
-  margin-top: 10px;
-}
-
-.emaail{
-  padding-left: 20px;
+  margin-top: 2px;
 }
 
 
-.iinput_buttons{
-  margin: 10px 10px 10px 10px;
+.input-caret {
+  padding-left: 12px; 
 }
-  
+
+
+
 .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
